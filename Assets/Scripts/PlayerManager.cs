@@ -8,6 +8,9 @@ public class PlayerManager : MonoBehaviour
     InputManager inputManager;
 
     [SerializeField]
+    CameraManager cameraManager;
+
+    [SerializeField]
     PlayerLocomotion playerLocomotion;
 
     private void Awake()
@@ -24,5 +27,11 @@ public class PlayerManager : MonoBehaviour
     private void FixedUpdate()
     {
         playerLocomotion.HandleAllMovement();
+    }
+
+    private void LateUpdate()
+    {
+
+        cameraManager.HandleAllCamera();
     }
 }
