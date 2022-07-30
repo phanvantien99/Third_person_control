@@ -7,6 +7,10 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     PlayerController playerControls;
 
+    AnimatorManager animatorManager;
+    float moveAmount;
+
+
     [SerializeField]
     Vector2 movementInput;
 
@@ -14,6 +18,11 @@ public class InputManager : MonoBehaviour
 
     public float horizontalInput;
 
+
+    private void Awake()
+    {
+        animatorManager = GetComponent<AnimatorManager>();
+    }
     private void OnEnable()
     {
         if (playerControls == null)
@@ -40,5 +49,7 @@ public class InputManager : MonoBehaviour
     {
         verticalInput = movementInput.y;
         horizontalInput = movementInput.x;
+        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
+        animatorManager.UpdateAnimator(0, moveAmount);
     }
 }
